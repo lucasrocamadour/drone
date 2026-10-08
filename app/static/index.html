@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flight Deck Visualizer</title>
+    <link rel=stylesheet href=../static/styles.css?v=20260818c>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="mil-console" aria-label="Flight simulator monitor">
+      <section class="screen">
+          <header class="screen-header">
+            <div>
+              <span class="kicker">STATUS</span>
+              <strong id="statusValue">Ready</strong>
+            </div>
+            <div>
+              <span class="kicker">TIME</span>
+              <strong id="timeValue">--</strong>
+            </div>
+            <div class="header-actions">
+              <button id="startSimulation" type="button" class="hardware-button">RUN BATCH</button>
+              <button id="restartSimulation" type="button" class="hardware-button">RESTART SIM</button>
+              <button id="playPause" type="button" class="hardware-button" aria-label="Play/Pause">PLAY/PAUSE</button>
+            </div>
+          </header>
+
+          <aside class="left-rail">
+            <h2>CONTROL</h2>
+
+            <div class="button-stack">
+              <button id="centerCamera" type="button" class="softkey">CENTER CAM</button>
+              <button id="togglePath" type="button" class="softkey">PATH</button>
+              <button id="trackObject" type="button" class="softkey">TRACK OBJECT</button>
+            </div>
+
+            <div id="batchConfigSection">
+              <h2>BATCH CONFIG</h2>
+
+              <div class="input-grid target-grid">
+                <label>
+                  <span>TARGET HEIGHT</span>
+                  <input id="target1z" type="number" step="0.1" placeholder="Z">
+                </label>
+                <button id="saveConditions" type="button" class="softkey">SAVE CONFIG</button>
+              </div>
+            </div>
+
+            <div id="specsSection">
+              <h2>SPECS</h2>
+
+              <dl class="specs-list">
+                <div><dt>FLIGHT CPU</dt><dd>STM32-class MCU</dd></div>
+                <div><dt>GNSS</dt><dd>u-blox SAM-M10Q</dd></div>
+                <div><dt>IMU</dt><dd>LSM6DSOX</dd></div>
+                <div><dt>BAROMETER</dt><dd>BMP384</dd></div>
+                <div><dt>MAGNETOMETER</dt><dd>MMC5983MA</dd></div>
+              </dl>
+            </div>
+          </aside>
+
+          <section class="main-display">
+            <div class="display-header">
+              <span>FLIGHT DISPLAY</span>
+              <span>BATCH FEED</span>
+            </div>
+
+            <div class="scene-frame">
+              <div id="scene3d" class="scene3d" aria-label="Drone replay scene">
+                <canvas id="sceneCanvas"></canvas>
+              </div>
+            </div>
+          </section>
+
+          <aside class="right-rail">
+            <h2>TELEMETRY</h2>
+
+            <dl class="data-list">
+              <div><dt>TRUE POSITION</dt><dd id="truePositionValue">--</dd></div>
+              <div><dt>EST POSITION</dt><dd id="positionValue">--</dd></div>
+              <div><dt>GPS POSITION</dt><dd id="gpsPositionValue">--</dd></div>
+              <div><dt>GPS VELOCITY</dt><dd id="gpsVelocityValue">--</dd></div>
+              <div><dt>TRUE VELOCITY</dt><dd id="trueVelocityValue">--</dd></div>
+              <div><dt>EST VELOCITY</dt><dd id="velocityValue">--</dd></div>
+              <div><dt>TRUE QUAT</dt><dd id="trueQuaternionValue">--</dd></div>
+              <div><dt>EST QUAT</dt><dd id="estQuaternionValue">--</dd></div>
+              <div><dt>SENSED ACCEL</dt><dd id="sensedAccelValue">--</dd></div>
+              <div><dt>BARO ALT</dt><dd id="baroAltitudeValue">--</dd></div>
+              <div><dt>ROTOR SPD</dt><dd id="rotorValue">--</dd></div>
+            </dl>
+          </aside>
+      </section>
+    </main>
+
+    <script type="module" src="../static/replay.js?v=20260818c"></script>
+  </body>
+</html>
